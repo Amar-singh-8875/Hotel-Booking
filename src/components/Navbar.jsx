@@ -6,8 +6,7 @@ import { FaHotel } from "react-icons/fa";
 
 const BookIcon = () => (
   <svg
-    className="w-4 h-4 text-gray-700"
-    aria-hidden="true"
+    className="w-4 h-4 text-gray-200"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -28,7 +27,6 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Hotels", path: "/rooms" },
-    // { name: "Experience", path: "/" },
     { name: "About", path: "/about" },
   ];
 
@@ -49,144 +47,116 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0  w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${
-        isScrolled
-          ? "bg-white/80 shadow-md text-gray-700 backdrop-blur-lg py-3 md:py-4"
-          : "py-4 md:py-6"
-      }`}
-    >
-      {/* Logo */}
-     <Link to="/">
-         <h1
-      className={`flex items-center gap-3 text-xl font-bold font-poppins transition-colors duration-300 ${
-        isScrolled ? "text-gray-700" : "text-white"
-      }`}
-    >
-      <FaHotel
-        className={`text-2xl transition-colors duration-300 ${
-          isScrolled ? "text-blue-600" : "text-white"
-        }`}
-      />
-      <span>Hotel Booking</span>
-    </h1>
-      </Link>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow-lg transition-all duration-300">
+      <div className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 h-16">
+        {/* Logo */}
+        <Link to="/">
+          <h1 className="flex items-center gap-3 text-xl font-bold font-poppins">
+            <FaHotel className="text-2xl text-blue-500" />
+            <span>Hotel Booking</span>
+          </h1>
+        </Link>
 
-      {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-4 lg:gap-8">
-        {navLinks.map((link, i) => (
-          <Link
-            key={i}
-            to={link.path}
-            className={`group flex flex-col gap-0.5 ${
-              isScrolled ? "text-gray-700" : "text-white"
-            }`}
-          >
-            {link.name}
-            <div
-              className={`${
-                isScrolled ? "bg-gray-700" : "bg-white"
-              } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
-            />
-          </Link>
-        ))}
-        <button
-          className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${
-            isScrolled ? "text-black" : "text-white"
-          } transition-all`}
-          onClick={() => navigate("/owner")}
-        >
-          Dashboard
-        </button>
-      </div>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map((link, i) => (
+            <Link
+              key={i}
+              to={link.path}
+              className="relative group px-2 py-1 text-gray-200 hover:text-white transition-colors"
+            >
+              {link.name}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300" />
+            </Link>
+          ))}
 
-      {/* Desktop Right */}
-      <div className="hidden md:flex items-center gap-4">
-        <img
-          src={assets.searchIcon}
-          alt="search"
-          className={`${isScrolled && "invert"} h-7 transition duration-500`}
-        />
-
-        {user ? (
-          <UserButton>
-            <UserButton.MenuItems>
-              <UserButton.Action
-                label="My Bookings"
-                labelIcon={<BookIcon />}
-                onClick={() => navigate("/my-bookings")}
-              />
-            </UserButton.MenuItems>
-          </UserButton>
-        ) : (
           <button
-            onClick={openSignIn}
-            className={`px-8 py-2.5 rounded-full ml-4 transition-all duration-500 ${
-              isScrolled ? "text-white bg-black" : "bg-white text-black"
-            }`}
-          >
-            Login
-          </button>
-        )}
-      </div>
-
-      {/* Mobile Menu Button */}
-      <div className="flex items-center gap-3 md:hidden">
-        {user && (
-          <UserButton>
-            <UserButton.MenuItems>
-              <UserButton.Action
-                label="My Bookings"
-                labelIcon={<BookIcon />}
-                onClick={() => navigate("/my-bookings")}
-              />
-            </UserButton.MenuItems>
-          </UserButton>
-        )}
-        <img
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          src={assets.menuIcon}
-          alt=""
-          className={`${isScrolled && "invert"} h-4`}
-        />
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 left-0 w-full h-screen bg-white text-base flex flex-col md:hidden items-center justify-center gap-6 font-medium text-gray-800 transition-all duration-500 ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <button
-          className="absolute top-4 right-4"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <img src={assets.closeIcon} alt="close-menu" className="h-6.5" />
-        </button>
-
-        {navLinks.map((link, i) => (
-          <Link
-            key={i}
-            to={link.path}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {link.name}
-          </Link>
-        ))}
-
-        {user && (
-          <button
-            className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all"
+            className="border border-blue-500 px-4 py-1 rounded-full text-blue-500 hover:bg-blue-500 hover:text-white transition-all"
             onClick={() => navigate("/owner")}
           >
             Dashboard
           </button>
-        )}
+        </div>
 
-        {!user && (
+        {/* Desktop Right */}
+        <div className="hidden md:flex items-center gap-4">
+          <img
+            src={assets.searchIcon}
+            alt="search"
+            className="h-6 invert hover:invert-0 transition-all duration-300 cursor-pointer"
+          />
+          {user ? (
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="My Bookings"
+                  labelIcon={<BookIcon />}
+                  onClick={() => navigate("/my-bookings")}
+                />
+              </UserButton.MenuItems>
+            </UserButton>
+          ) : (
+            <button
+              onClick={openSignIn}
+              className="px-6 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-all duration-300"
+            >
+              Login
+            </button>
+          )}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-3 md:hidden">
+          {user && (
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="My Bookings"
+                  labelIcon={<BookIcon />}
+                  onClick={() => navigate("/my-bookings")}
+                />
+              </UserButton.MenuItems>
+            </UserButton>
+          )}
+          <img
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            src={assets.menuIcon}
+            alt="menu"
+            className="h-5 cursor-pointer invert"
+          />
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed top-0 left-0 w-full h-screen bg-gray-900 text-white flex flex-col items-center justify-center gap-6 transition-transform duration-300 md:hidden ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <button
+          className="absolute top-6 right-6"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <img src={assets.closeIcon} alt="close-menu" className="h-6" />
+        </button>
+
+        {navLinks.map((link, i) => (
+          <Link key={i} to={link.path} onClick={() => setIsMenuOpen(false)}>
+            {link.name}
+          </Link>
+        ))}
+
+        {user ? (
+          <button
+            className="border border-blue-500 px-4 py-1 rounded-full text-blue-500 hover:bg-blue-500 hover:text-white transition-all"
+            onClick={() => navigate("/owner")}
+          >
+            Dashboard
+          </button>
+        ) : (
           <button
             onClick={openSignIn}
-            className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500"
+            className="px-8 py-2.5 rounded-full bg-blue-500 hover:bg-blue-600 transition-all"
           >
             Login
           </button>
