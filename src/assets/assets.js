@@ -23,10 +23,10 @@ import badgeIcon from './badgeIcon.svg'
 import menuIcon from './menuIcon.svg'
 import closeMenu from './closeMenu.svg'
 import guestsIcon from './guestsIcon.svg'
-import roomImg1 from './roomImg1.png'
-import roomImg2 from './roomImg2.png'
-import roomImg3 from './roomImg3.png'
-import roomImg4 from './roomImg4.png'
+import roomImg1 from './roomImg1.jpg'
+import roomImg2 from './roomImg2.jpg'
+import roomImg3 from './roomImg3.jpg'
+import roomImg4 from './roomImg4.jpg'
 import regImage from './regImage.png'
 import exclusiveOfferCardImg1 from "./exclusiveOfferCardImg1.png";
 import exclusiveOfferCardImg2 from "./exclusiveOfferCardImg2.png";
@@ -222,7 +222,7 @@ export const roomsDummyData = [
         roomType: "Double Bed",
         pricePerNight: 500,
         amenities: ["Room Service", "Mountain View"],
-        images: [roomImg1, roomImg4],
+        images: [roomImg4, roomImg1],
         isAvailable: true
     },
     {
@@ -231,7 +231,7 @@ export const roomsDummyData = [
         roomType: "Single Bed",
         pricePerNight: 420,
         amenities: ["Free WiFi", "Room Service"],
-        images: [roomImg2, roomImg3],
+        images: [roomImg3, roomImg2],
         isAvailable: true
     }
 ];

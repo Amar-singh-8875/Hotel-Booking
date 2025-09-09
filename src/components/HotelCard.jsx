@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import assets from '../assets/assets';
 
 const HotelCard = ({ room, index }) => {
+  // Format price in Indian Rupees with proper commas
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0, // remove decimals
+    }).format(price);
+  };
+
   return (
     <Link
       to={`/rooms/${room._id}`}
@@ -36,11 +45,15 @@ const HotelCard = ({ room, index }) => {
         </div>
         <div className="flex items-center justify-between mt-4">
           <p>
-            <span className="text-xl text-gray-800">${room.pricePerNight}</span>/night
+            <span className="text-xl text-gray-800">
+              {formatPrice(room.pricePerNight)}
+            </span>
+            /night
           </p>
           <button
+          
             className="px-4 py-2 text-sm font-medium border border-gray-300
-                 rounded hover:bg-gray-50 transition-all cursor-pointer"
+             rounded hover:bg-gray-50 transition-all cursor-pointer"
           >
             Book Now
           </button>
