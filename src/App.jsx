@@ -13,10 +13,11 @@ import Dashboard from './pages/hotelOwner/Dashboard';
 import AddRoom from './pages/hotelOwner/AddRoom';
 import ListRoom from './pages/hotelOwner/ListRoom';
 import SearchResults from './pages/SearchResults';
+import ProtectedRoute from './components/ProtectedRoute';  
 
 const App = () => {
-
   const isOwnerPath = useLocation().pathname.includes("owner");
+
   return (
     <div>
       {!isOwnerPath && <Navbar/>}
@@ -29,18 +30,20 @@ const App = () => {
           <Route path='/rooms' element={<AllRooms/>}/>
           <Route path='/rooms/:id' element={<RoomDetails/>}/>
           <Route path='/my-bookings' element={<MyBookings/>}/>
-          <Route path='/owner' element={<Layout/>}>
-          <Route index element={<Dashboard/>}/>
-          <Route path='add-room' element={<AddRoom/>}/>
-          <Route path='add-room' element={<AddRoom/>}/>
-          <Route path='list-room' element={<ListRoom/>}/>
 
+          {/* ✅ Owner Routes protected */}
+          <Route path='/owner' element={
+            <ProtectedRoute>
+              <Layout/>
+            </ProtectedRoute>
+          }>
+            <Route index element={<Dashboard/>}/>
+            <Route path='add-room' element={<AddRoom/>}/>
+            <Route path='list-room' element={<ListRoom/>}/>
           </Route>
         </Routes>
       </div>
-      <div>
-        <Footer/>
-      </div>
+      <Footer/>
     </div>
   )
 }
